@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="note" ></dbname>
+    <version value="1" ></version>
+    <list>
+        <mapping class="zeaze.com.note.data.Note"></mapping>
+        <mapping class="zeaze.com.note.data.Weather"></mapping>
+        <mapping class="zeaze.com.note.data.Note"></mapping>
+    </list>
+</litepal>
