@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NoteView {
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        build=findViewById(R.id.build);
+        build=findViewById(R.id.build_bg);
         build.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
