@@ -1,6 +1,8 @@
 package zeaze.com.note.data;
 
-public class Weather {
+import org.litepal.crud.LitePalSupport;
+
+public class Weather extends LitePalSupport {
     boolean isSelected;
 
     public boolean isSelected() {

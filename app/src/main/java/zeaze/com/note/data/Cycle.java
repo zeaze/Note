@@ -1,6 +1,8 @@
 package zeaze.com.note.data;
 
-public class Cycle {
+import org.litepal.crud.LitePalSupport;
+
+public class Cycle extends LitePalSupport {
     boolean isSelected;
 
     public boolean isSelected() {

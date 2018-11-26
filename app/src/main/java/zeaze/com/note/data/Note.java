@@ -1,16 +1,27 @@
 package zeaze.com.note.data;
 
+import org.litepal.crud.LitePalSupport;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Note {
-    String note;
-    Date creatAt,deletedAt;
-    boolean isDeleted,isRemind;
+public class Note extends LitePalSupport implements Serializable {
+    String note="";
+    Date date =new Date(),deletedAt=null,createAt;
+    int isDeleted=0,isRemind=0;
 
-    List<Weather> weatherList;
-    List<Cycle> cycleList;
+    List<Weather> weatherList=new ArrayList<>();
+    List<Cycle> cycleList=new ArrayList<>();
 
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
 
     public String getNote() {
         return note;
@@ -20,12 +31,12 @@ public class Note {
         this.note = note;
     }
 
-    public Date getCreatAt() {
-        return creatAt;
+    public Date getDate() {
+        return date;
     }
 
-    public void setCreatAt(Date creatAt) {
-        this.creatAt = creatAt;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Date getDeletedAt() {
@@ -36,20 +47,20 @@ public class Note {
         this.deletedAt = deletedAt;
     }
 
-    public boolean isDeleted() {
+    public int getIsDeleted() {
         return isDeleted;
     }
 
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
-    public boolean isRemind() {
+    public int getIsRemind() {
         return isRemind;
     }
 
-    public void setRemind(boolean remind) {
-        isRemind = remind;
+    public void setIsRemind(int isRemind) {
+        this.isRemind = isRemind;
     }
 
     public List<Weather> getWeatherList() {
