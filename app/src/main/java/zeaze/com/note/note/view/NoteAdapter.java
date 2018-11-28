@@ -17,8 +17,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import zeaze.com.note.MainActivity;
-import zeaze.com.note.MyApplication;
+import zeaze.com.note.App;
 import zeaze.com.note.R;
 import zeaze.com.note.data.Note;
 import zeaze.com.note.editNote.EditNote;
@@ -146,7 +145,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                     ((AppCompatActivity) context).startActivityForResult(intent, ii);
                 }
                 else {
-                    MyApplication.toast("回收站的便签无法编辑，请移除回收站再编辑");
+                    App.toast("回收站的便签无法编辑，请移除回收站再编辑");
                 }
 
             }

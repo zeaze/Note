@@ -1,7 +1,6 @@
 package zeaze.com.note;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.Nullable;
@@ -19,13 +18,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.litepal.LitePal;
-import org.litepal.crud.DataSupport;
-import org.litepal.tablemanager.Connector;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import zeaze.com.note.base.pullExtendLayoutForRecyclerView.ExtendListHeader;
+import zeaze.com.note.base.pullExtendLayoutForRecyclerView.PullExtendLayoutForRecyclerView;
 import zeaze.com.note.data.Note;
 import zeaze.com.note.editNote.EditNote;
 import zeaze.com.note.note.present.NotePresent;
@@ -45,7 +44,8 @@ public class MainActivity extends AppCompatActivity implements NoteView {
     ConstraintLayout deleteConstraintLayout;
     View arrow;
 
-
+    RecyclerView mRecyclerView;
+    RecyclerView listHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,8 +188,16 @@ public class MainActivity extends AppCompatActivity implements NoteView {
             }
         });
 
+        initSliding();
     }
 
+    void initSliding(){
+
+        PullExtendLayoutForRecyclerView pullExtendLayoutForRecyclerView = findViewById(R.id.pull_extend);
+        pullExtendLayoutForRecyclerView.setPullLoadEnabled(false);
+        ExtendListHeader mPullNewHeader = findViewById(R.id.extend_header);
+
+    }
     @Override
     public void notifyLongClick() {
         deleteConstraintLayout.setVisibility(View.VISIBLE);
