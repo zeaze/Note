@@ -10,7 +10,7 @@ import java.util.List;
 public class Note extends LitePalSupport implements Serializable {
     String note="";
     Date date =new Date(),deletedAt=null,createAt;
-    int isDeleted=0,isRemind=0;
+    int isDeleted=0,isRemind=0;         //0为未删除/不提醒，1为删除/提醒.在活动里，1表示选中，2表示回收站里的选中
 
     List<Weather> weatherList=new ArrayList<>();
     List<Cycle> cycleList=new ArrayList<>();

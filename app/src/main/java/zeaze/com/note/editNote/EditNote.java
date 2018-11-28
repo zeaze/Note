@@ -23,8 +23,7 @@ import zeaze.com.note.data.Note;
 
 public class EditNote extends AppCompatActivity {
     View arrow;
-    TextView date,edit_note;
-    ImageView image;
+    TextView date,edit_note,save,notSave;
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Note note;
     String TAG="zeaze2";
@@ -41,14 +40,6 @@ public class EditNote extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
-        image=findViewById(R.id.image);
-        int result = 0;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = getResources().getDimensionPixelSize(resourceId);
-
-        }
-
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
         note=(Note)bundle.get("note");
@@ -63,15 +54,56 @@ public class EditNote extends AppCompatActivity {
         arrow=findViewById(R.id.arrow);
         date=findViewById(R.id.date);
         edit_note=findViewById(R.id.note);
+        save=findViewById(R.id.save);
+        notSave=findViewById(R.id.not_save);
+
+        save.setVisibility(View.INVISIBLE);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        notSave.setVisibility(View.INVISIBLE);
+        notSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
 
         date.setHint(formatter.format(note.getDate()));
+
         arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+
         edit_note.setText(note.getNote());
+
+        edit_note.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!edit_note.getText().toString().equals("")&&save.getVisibility()==View.INVISIBLE){
+                    save.setVisibility(View.VISIBLE);
+                    notSave.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
     }
 

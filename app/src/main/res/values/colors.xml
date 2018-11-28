@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="bg">#f6f6f6</color>
     <color name="segmentingLine">#DBDBDB</color>
+    <color name="recover">#696969</color>
 </resources>

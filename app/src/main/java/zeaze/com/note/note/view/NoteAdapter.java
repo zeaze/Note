@@ -18,20 +18,38 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import zeaze.com.note.MainActivity;
+import zeaze.com.note.MyApplication;
 import zeaze.com.note.R;
 import zeaze.com.note.data.Note;
 import zeaze.com.note.editNote.EditNote;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     Context context;
+    NoteView view;
     List<Note>notes;
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public boolean isLongClick;
+    int noteStatus;//0为正常便签，1为回收站
     String TAG="zeaze2";
 
-    public NoteAdapter(Context context, List<Note>notes){
+    public int getNoteStatus() {
+        return noteStatus;
+    }
+
+
+    public void setNoteStatus(int noteStatus) {
+        this.noteStatus = noteStatus;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
+
+    public NoteAdapter(Context context , NoteView view, List<Note>notes){
         this.context=context;
+        this.view=view;
         this.notes=notes;
+        noteStatus=0;
         isLongClick=false;
     }
 
@@ -68,7 +86,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         }
         else {
             viewHolder.checkBox.setVisibility(View.VISIBLE);
-            if (notes.get(ii).getIsDeleted()==1){
+            if (notes.get(ii).getIsDeleted()>noteStatus){
                 viewHolder.checkBox.setChecked(true);
                 viewHolder.item.setBackgroundResource(R.drawable.note_bg_select);
             }
@@ -85,11 +103,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    notes.get(ii).setIsDeleted(1);
+                    notes.get(ii).setIsDeleted(noteStatus+1);
                     viewHolder.item.setBackgroundResource(R.drawable.note_bg_select);
                 }
                 else {
-                    notes.get(ii).setIsDeleted(0);
+                    notes.get(ii).setIsDeleted(noteStatus);
                     viewHolder.item.setBackgroundResource(R.drawable.note_bg);
                 }
             }
@@ -99,8 +117,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             public boolean onLongClick(View v) {
                 if (!isLongClick) {
                     isLongClick=true;
-                    notes.get(ii).setIsDeleted(1);
+                    notes.get(ii).setIsDeleted(noteStatus+1);
                     viewHolder.checkBox.setChecked(true);
+                    view.notifyLongClick();
                     notifyDataSetChanged();
                     return true;
                 }
@@ -119,13 +138,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                         viewHolder.checkBox.setChecked(true);
                     }
                 }
-                else {
-                    Intent intent=new Intent(context,EditNote.class);
-                    Bundle bundle=new Bundle();
-                    bundle.putSerializable("note",notes.get(ii));
+                else if (noteStatus==0) {
+                    Intent intent = new Intent(context, EditNote.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("note", notes.get(ii));
                     intent.putExtras(bundle);
-                    ((AppCompatActivity)context).startActivityForResult(intent,ii);
+                    ((AppCompatActivity) context).startActivityForResult(intent, ii);
                 }
+                else {
+                    MyApplication.toast("回收站的便签无法编辑，请移除回收站再编辑");
+                }
+
             }
         });
 
