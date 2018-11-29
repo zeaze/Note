@@ -1,4 +1,4 @@
-package zeaze.com.note.data;
+package zeaze.com.note.DB;
 
 import org.litepal.crud.LitePalSupport;
 

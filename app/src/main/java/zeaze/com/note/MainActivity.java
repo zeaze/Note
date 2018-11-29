@@ -1,10 +1,15 @@
 package zeaze.com.note;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -25,7 +30,7 @@ import java.util.List;
 
 import zeaze.com.note.base.pullExtendLayoutForRecyclerView.ExtendListHeader;
 import zeaze.com.note.base.pullExtendLayoutForRecyclerView.PullExtendLayoutForRecyclerView;
-import zeaze.com.note.data.Note;
+import zeaze.com.note.DB.Note;
 import zeaze.com.note.editNote.EditNote;
 import zeaze.com.note.note.present.NotePresent;
 import zeaze.com.note.note.view.NoteAdapter;
@@ -189,6 +194,43 @@ public class MainActivity extends AppCompatActivity implements NoteView {
         });
 
         initSliding();
+        allThePermission();
+    }
+    private void allThePermission(){//获取权限
+        List<String> permissionList = new ArrayList<>();
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.ACCESS_NETWORK_STATE);
+        }
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.INTERNET);
+        }
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+
+        if(!permissionList.isEmpty()){
+            String [] permissions = permissionList.toArray(new String[permissionList.size()]);
+            ActivityCompat.requestPermissions(this,permissions,1);
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case 1:{
+                for(int result :grantResults){
+                    if(result != PackageManager.PERMISSION_GRANTED){
+                        App.toast("同意权限才能使用天气功能");
+                        return;
+                    }
+                }
+            }
+            default:
+        }
     }
 
     void initSliding(){
@@ -196,6 +238,7 @@ public class MainActivity extends AppCompatActivity implements NoteView {
         PullExtendLayoutForRecyclerView pullExtendLayoutForRecyclerView = findViewById(R.id.pull_extend);
         pullExtendLayoutForRecyclerView.setPullLoadEnabled(false);
         ExtendListHeader mPullNewHeader = findViewById(R.id.extend_header);
+        mPullNewHeader.init();
 
     }
     @Override

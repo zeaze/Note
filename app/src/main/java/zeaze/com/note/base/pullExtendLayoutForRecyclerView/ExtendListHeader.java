@@ -3,11 +3,16 @@ package zeaze.com.note.base.pullExtendLayoutForRecyclerView;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
+import zeaze.com.note.App;
 import zeaze.com.note.R;
+import zeaze.com.note.weather.bean.HeWeather6;
 
 
 /**
@@ -103,8 +108,32 @@ public class ExtendListHeader extends ExtendLayout {
     protected void onRefreshing() {
     }
 
+
+    ImageView icon;
+    TextView weather,date,tmp,city;
+
+    public void init(){
+        icon=findViewById(R.id.icon);
+        weather=findViewById(R.id.weather);
+        date=findViewById(R.id.date);
+        tmp=findViewById(R.id.tmp);
+        city=findViewById(R.id.city);
+    }
+
+    HeWeather6 heWeather6=null;
+    String TAG="zeaze2";
+
     @Override
     public void onPull(int offset) {
+        if (heWeather6!=App.getHeWeather6()){
+            heWeather6=App.getHeWeather6();
+            icon.setImageResource(R.drawable.icon);
+            weather.setText(heWeather6.getNow().getCond_txt());
+            date.setText(heWeather6.getUpdate().getLoc());
+            tmp.setText(heWeather6.getNow().getTmp() + "℃");
+            city.setText(heWeather6.getBasic().getLocation());
+            Log.d(TAG, "onPull: "+"天气刷新");
+        }
         if (!arrivedListHeight) {
             mExpendPoint.setVisibility(VISIBLE);
             float percent = Math.abs(offset) / containerHeight;

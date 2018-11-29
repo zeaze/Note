@@ -3,23 +3,18 @@ package zeaze.com.note.editNote;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import zeaze.com.note.R;
-import zeaze.com.note.data.Note;
+import zeaze.com.note.DB.Note;
 
 public class EditNote extends AppCompatActivity {
     View arrow;

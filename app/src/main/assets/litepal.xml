@@ -3,8 +3,8 @@
     <dbname value="note" ></dbname>
     <version value="3" ></version>
     <list>
-        <mapping class="zeaze.com.note.data.Note"></mapping>
-        <mapping class="zeaze.com.note.data.Weather"></mapping>
-        <mapping class="zeaze.com.note.data.Note"></mapping>
+        <mapping class="zeaze.com.note.DB.Note"></mapping>
+        <mapping class="zeaze.com.note.DB.Weather"></mapping>
+        <mapping class="zeaze.com.note.DB.Note"></mapping>
     </list>
 </litepal>

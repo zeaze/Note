@@ -19,7 +19,7 @@ import java.util.List;
 
 import zeaze.com.note.App;
 import zeaze.com.note.R;
-import zeaze.com.note.data.Note;
+import zeaze.com.note.DB.Note;
 import zeaze.com.note.editNote.EditNote;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
@@ -60,6 +60,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
+        if (i==notes.size()){
+            viewHolder.item.setVisibility(View.GONE);
+            return;
+        }
         final int ii=notes.size()-i-1;
         viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -156,7 +160,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return notes.size();
+        return notes.size()+1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
