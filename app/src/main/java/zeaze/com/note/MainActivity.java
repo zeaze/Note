@@ -299,6 +299,7 @@ public class MainActivity extends AppCompatActivity implements NoteView {
                     notes.get(requestCode).setDeletedAt(new Date());
                     notes.get(requestCode).setIsDeleted(1);
                     notes.get(requestCode).save();
+                    deleteNotes.add(notes.get(requestCode));
                     notes.remove(requestCode);
                     if (!note.getNote().equals("")) {
                         notes.add(note);

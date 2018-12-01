@@ -127,12 +127,18 @@ public class ExtendListHeader extends ExtendLayout {
     public void onPull(int offset) {
         if (heWeather6!=App.getHeWeather6()){
             heWeather6=App.getHeWeather6();
-            icon.setImageResource(R.drawable.icon);
-            weather.setText(heWeather6.getNow().getCond_txt());
-            date.setText(heWeather6.getUpdate().getLoc());
-            tmp.setText(heWeather6.getNow().getTmp() + "℃");
-            city.setText(heWeather6.getBasic().getLocation());
-            Log.d(TAG, "onPull: "+"天气刷新");
+            if (heWeather6.getStatus().equals("ok")) {
+                icon.setImageResource(R.drawable.icon);
+                weather.setText(heWeather6.getNow().getCond_txt());
+                date.setText(heWeather6.getUpdate().getLoc());
+                tmp.setText(heWeather6.getNow().getTmp() + "℃");
+                city.setText(heWeather6.getBasic().getLocation());
+                Log.d(TAG, "onPull: " + "天气刷新");
+            }
+            else {
+                Log.d(TAG, "onPull: "+heWeather6.getStatus());
+                weather.setText(heWeather6.getStatus());
+            }
         }
         if (!arrivedListHeight) {
             mExpendPoint.setVisibility(VISIBLE);

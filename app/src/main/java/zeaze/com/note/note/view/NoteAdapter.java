@@ -64,6 +64,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             viewHolder.item.setVisibility(View.GONE);
             return;
         }
+        viewHolder.item.setVisibility(View.VISIBLE);
         final int ii=notes.size()-i-1;
         viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
