@@ -23,13 +23,13 @@ import zeaze.com.note.DB.Note;
 import zeaze.com.note.editNote.EditNote;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
-    Context context;
-    NoteView view;
-    List<Note>notes;
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private Context context;
+    private NoteView view;
+    private List<Note>notes;
+    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public boolean isLongClick;
-    int noteStatus;//0为正常便签，1为回收站
-    String TAG="zeaze2";
+    private int noteStatus;//0为正常便签，1为回收站
+    private String TAG="zeaze2";
 
     public int getNoteStatus() {
         return noteStatus;

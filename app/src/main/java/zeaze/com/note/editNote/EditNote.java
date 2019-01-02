@@ -17,11 +17,11 @@ import zeaze.com.note.R;
 import zeaze.com.note.DB.Note;
 
 public class EditNote extends AppCompatActivity {
-    View arrow;
-    TextView date,edit_note,save,notSave;
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    Note note;
-    String TAG="zeaze2";
+    private View arrow;
+    private TextView date,edit_note,save,notSave;
+    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private Note note;
+    private String TAG="zeaze2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

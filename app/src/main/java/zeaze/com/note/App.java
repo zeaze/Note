@@ -24,20 +24,10 @@ import zeaze.com.note.weather.bean.HeWeather6;
 
 public class App extends LitePalApplication {
 
-
-    static public void toast(String s) {
-        Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
-    }
-
-    private static Context context;
-
-    public static Context getContext() {
-        return context;
-    }
-
-    static String TAG="zeaze2";
-
-    static Location location = null;
+    static private Context context;
+    static private String TAG="zeaze2";
+    static private Location location = null;
+    static private HeWeather6 heWeather6=null;
 
     public static Location getLocation() {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -73,7 +63,7 @@ public class App extends LitePalApplication {
         return location;
     }
 
-    static HeWeather6 heWeather6=null;
+
 
     public static HeWeather6 getHeWeather6() {
         return heWeather6;
@@ -106,5 +96,12 @@ public class App extends LitePalApplication {
         super.onTerminate();
     }
 
+    static public void toast(String s) {
+        Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
+    }
+
+    public static Context getContext() {
+        return context;
+    }
 
 }

@@ -38,19 +38,16 @@ import zeaze.com.note.note.view.NoteView;
 
 public class MainActivity extends AppCompatActivity implements NoteView {
     String TAG="zeaze2";
-    RecyclerView recyclerView;
-    TextView delete,recover;
-    Spinner title;
-    String[] titleArr = {"便签","回收站"};
-    NotePresent present;
-    NoteAdapter adapter;
-    List<Note> notes,allNotes,deleteNotes;
-    ImageView build,buildBg;
-    ConstraintLayout deleteConstraintLayout;
-    View arrow;
-
-    RecyclerView mRecyclerView;
-    RecyclerView listHeader;
+    private RecyclerView recyclerView;
+    private TextView delete,recover;
+    private Spinner title;
+    private String[] titleArr = {"便签","回收站"};
+    private NotePresent present;
+    private NoteAdapter adapter;
+    private List<Note> notes,allNotes,deleteNotes;
+    private ImageView build,buildBg;
+    private ConstraintLayout deleteConstraintLayout;
+    private View arrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NoteView {
         initSliding();
         allThePermission();
     }
-    private void allThePermission(){//获取权限
+    private void allThePermission(){
         List<String> permissionList = new ArrayList<>();
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             permissionList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
