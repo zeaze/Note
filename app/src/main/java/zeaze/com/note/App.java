@@ -47,19 +47,6 @@ public class App extends LitePalApplication {
                 return location;
             }
         }
-        /*
-        String provider = null;
-        if (providerList.contains(LocationManager.GPS_PROVIDER)) {
-            provider = LocationManager.GPS_PROVIDER;
-
-        }
-        if (providerList.contains(LocationManager.NETWORK_PROVIDER)) {
-            provider = LocationManager.NETWORK_PROVIDER;
-        }
-        location = locationManager.getLastKnownLocation(provider);
-        if (location==null){
-            Log.d(TAG, "getLocation: "+provider);
-        }*/
         Log.d(TAG, "getLocation: "+"null");
         return location;
     }
@@ -75,7 +62,7 @@ public class App extends LitePalApplication {
     }
 
     @Override
-    public void onCreate() {
+    public void onCreate() {                                  //做一些初始化，bmob和OKgo，还有天气服务，用计时器重复请求天气
         super.onCreate();
         context=this;
         OkGo.getInstance().init(this);

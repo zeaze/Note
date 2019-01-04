@@ -2,7 +2,7 @@ package zeaze.com.note.Bmob;
 
 import cn.bmob.v3.BmobObject;
 
-public class NoteData extends BmobObject {
+public class NoteData extends BmobObject {      //备份的时候上传的数据
     String noteJson ="";
     String password="";
 

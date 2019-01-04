@@ -30,8 +30,8 @@ import zeaze.com.note.weather.bean.Now;
 import zeaze.com.note.weather.bean.Update;
 
 public class WeatherService extends Service {
-    String TAG="zeaze2";
-    String url="https://free-api.heweather.com/s6/weather/now?"+"key=fcecd896ff33472eab517a59d52957a2&";
+    private String TAG="zeaze2";
+    private String url="https://free-api.heweather.com/s6/weather/now?"+"key=fcecd896ff33472eab517a59d52957a2&";
 
     public WeatherService() {
     }
@@ -43,7 +43,7 @@ public class WeatherService extends Service {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(Intent intent, int flags, int startId) {              //使用OKgo获取天气，获取成功后开启前台服务
         Log.d(TAG, "onStartCommand: "+"service");
         if (App.getLocation() != null) {
             Log.d(TAG, "onStartCommand: "+"location");

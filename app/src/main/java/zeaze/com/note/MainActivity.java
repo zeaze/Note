@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NoteView {
     private TextView delete,recover,backups;
     private Spinner title,viewMode;
     private String[] titleArr = {"便签","回收站"},viewModeArr = {"单列","双列"};
-    private NotePresent present;
+    private NotePresent present;                                           //本来打算用MVP模式，note包就是MVP架构的，但实际上因为操作不复杂，弃用了MVP，没有使用MVP
     private NoteAdapter adapter;
     private List<Note> notes,allNotes,deleteNotes;
     private ImageView build,buildBg;
@@ -262,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements NoteView {
         allThePermission();
     }
 
-    private void initBackups(){
+    private void initBackups(){                                //备份功能的实现
         backups=findViewById(R.id.backups);
         backups.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -405,7 +405,18 @@ public class MainActivity extends AppCompatActivity implements NoteView {
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
         }
-
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.ACCESS_WIFI_STATE);
+        }
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.WAKE_LOCK) != PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.WAKE_LOCK);
+        }
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.READ_PHONE_STATE);
+        }
         if(!permissionList.isEmpty()){
             String [] permissions = permissionList.toArray(new String[permissionList.size()]);
             ActivityCompat.requestPermissions(this,permissions,1);
@@ -428,7 +439,7 @@ public class MainActivity extends AppCompatActivity implements NoteView {
         }
     }
 
-    void initSliding(){
+    void initSliding(){                                       //下拉栏，代码来自git，具体实现原理我也不知道，下拉功能和recyclerview绑定
         PullExtendLayoutForRecyclerView pullExtendLayoutForRecyclerView = findViewById(R.id.pull_extend);
         pullExtendLayoutForRecyclerView.setPullLoadEnabled(false);
         ExtendListHeader mPullNewHeader = findViewById(R.id.extend_header);
@@ -436,7 +447,7 @@ public class MainActivity extends AppCompatActivity implements NoteView {
 
     }
     @Override
-    public void notifyLongClick() {
+    public void notifyLongClick() {                                    //便签内容在长按的时候需要改变界面元素的可见性
         deleteConstraintLayout.setVisibility(View.VISIBLE);
         title.setVisibility(View.INVISIBLE);
         viewMode.setVisibility(View.INVISIBLE);
@@ -449,7 +460,7 @@ public class MainActivity extends AppCompatActivity implements NoteView {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed() {                                  //长按状态下点返回键并不会退出当前活动，而是退出长按状态
         if (adapter.isLongClick) {
             adapter.isLongClick=false;
             for (Note note:notes){
@@ -476,7 +487,7 @@ public class MainActivity extends AppCompatActivity implements NoteView {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {               //新建或修改便签后的处理
         Log.d(TAG, "onActivityResult: "+requestCode);
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode==RESULT_OK){

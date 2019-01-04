@@ -60,7 +60,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
-        if (i==notes.size()){
+        if (i==notes.size()){   //经测试发现下拉栏天气的下拉操作要recyclerview有item的时候才能生效，所以count数为实际count数+1，并把第一个item设备不可见
             viewHolder.item.setVisibility(View.GONE);
             return;
         }
@@ -162,7 +162,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return notes.size()+1;
-    }
+    }           //经测试发现下拉栏天气的下拉操作要recyclerview有item的时候才能生效，所以count数为实际count数+1，并把第一个item设备不可见
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView note,date;
