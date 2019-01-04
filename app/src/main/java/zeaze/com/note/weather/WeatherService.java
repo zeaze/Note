@@ -84,7 +84,7 @@ public class WeatherService extends Service {
                                 remoteViews.setTextViewText(R.id.city, basic.getLocation());
 
                                 Notification notification = builder
-                                        .setSmallIcon(R.mipmap.ic_launcher)
+                                        .setSmallIcon(R.drawable.icon)
                                         .setCustomContentView(remoteViews)
                                         .setWhen(System.currentTimeMillis())
                                         .build();

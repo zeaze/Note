@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cn.bmob.v3.Bmob;
 import zeaze.com.note.weather.WeatherService;
 import zeaze.com.note.weather.bean.HeWeather6;
 
@@ -78,6 +79,7 @@ public class App extends LitePalApplication {
         super.onCreate();
         context=this;
         OkGo.getInstance().init(this);
+        Bmob.initialize(this, "a193e6e7dccc3d36679d1136060599ed");
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
